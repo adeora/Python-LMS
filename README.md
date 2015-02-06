@@ -1,8 +1,8 @@
-# TSA Course Management System- Version 1.2 #
+# TSA Learning Management System- Version 1.2 #
 
 ## Description ##
 
-This is a Course Management System created for the 2014 TSA National Conference, and built with Flask.
+This is a Learning Management System created for the 2014 TSA National Conference, and built with Flask.
 
 To keep the code nice and modular, the app is organized as such:
 
