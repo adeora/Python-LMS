@@ -1,0 +1,71 @@
+{% extends "/teachers/base_template.html" %}
+	{% block title %}Quiz: {{quiz_name}}{% endblock %}
+	{% block body %}
+		<style>
+			ul {
+				list-style-type: none;
+				margin: 0;
+			}
+			a span {
+				font-size: 12px;
+			}
+			h3 {
+				font-size: 20px;
+			}
+
+			.indent {
+				margin-left:20px;
+			}
+		</style>
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<h1>Quiz: {{quiz_name}}</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span6">
+					<h2>Quiz Questions</h2>
+						{% for question in questions %}
+							<h3>{{question.text}}</h3>
+							<div class="indent">
+								<p><strong>A:</strong> {{question.a}}</p>
+								<p><strong>B:</strong> {{question.b}}</p>
+								<p><strong>C:</strong> {{question.c}}</p>
+								<p><strong>D:</strong> {{question.d}}</p>
+								<p><strong>Correct Answer:</strong> {{question.correct}}</p>
+							</div>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="span6">
+					<h2>Add a Question</h2>
+					<form class="form-horizontal well" method="POST" action="/teachers/questions/create/{{quiz_id}}/">
+						<fieldset>
+							<div><span>Question: </span><input type="text" name="question"  required/></div>
+							<div><span>A Answer: </span><input type="text" name="a_answer"  required/></div>
+							<div><span>B Answer: </span><input type="text" name="b_answer"  required/></div>
+							<div><span>C Answer: </span><input type="text" name="c_answer"  required/></div>
+							<div><span>D Answer: </span><input type="text" name="d_answer"  required/></div>
+							<div><span>Correct Answer: </span>
+								<select name="answer" required>
+									<option value="0">A</option>
+									<option value="1">B</option>
+									<option value="2">C</option>
+									<option value="3">D</option>
+								</select>
+							</div>
+							<div><input type="submit" class="btn btn-primary"></div>
+							{% with messages = get_flashed_messages() %}
+								{% if messages %}
+									{% for message in messages %}
+										<div class="alert alert-success" style="margin: 0 auto;"><strong>{{message}}</strong></div>
+									{% endfor %}
+								{% endif %}
+							{% endwith %}
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	{% endblock %}

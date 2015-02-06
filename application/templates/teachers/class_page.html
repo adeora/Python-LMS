@@ -1,0 +1,100 @@
+{% extends "/teachers/base_template.html" %}
+	{% block title %}Your Class, {{class_name}}{% endblock %}
+	{% block body %}
+		<style>
+			ul {
+				list-style-type: none;
+				margin: 0;
+			}
+		</style>
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<h1>Your Class, {{class_name}}</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span4">
+					<h2>Students Enrolled</h2>
+					<ul>
+						{% for student in students %}
+							<li><a href="/people/{{student.id}}/">{{student.name}}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="span4">
+					<h2>Topics</h2>
+					<ul>
+						{% for topic in topics %}
+							<li><a href="/teachers/topics/{{topic.id}}/">{{topic.name}}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="span4">
+					<h2>Assignments Given</h2>
+					<ul>
+						{% for assignment in assignments %}
+							<li><a href="/teachers/assignments/{{assignment.id}}/">{{assignment.name}}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span8">
+					<h2>Grades Given to This Class</h2>
+					{% if grades %}
+						<table class="table table-striped table-hover table-bordered">
+							<thead>
+								<tr>
+									<th>Student Name</th>
+									<th>Assignment/Quiz Name</th>
+									<th>Grade (%)</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for grade in grades %}
+									<tr>
+										<td>{{grade.student_name}}</td>
+										<td>{{grade.thing_name}}</td>
+										<td>{{grade.grade}}</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					{% else %}
+						<p><strong>No grades have been given to this class.</strong></p>
+					{% endif %}
+				</div>
+				<div class="span4">
+					<h2>Add a Grade</h2>
+					<form action="/teachers/grades/add/{{class_id}}/" method="POST" class="form-horizontal well">
+						<fieldset>
+							<div><span>Student: </span>
+								<select name="student"  required>
+									{% for student in students %}
+										<option value="{{student.id}}">{{student.name}}</option>
+									{% endfor %}
+								</select>
+							</div>
+							<div><span>Assignment: </span>
+								<select name="assignment" required>
+									{% for assignment in assignments %}
+										<option value="{{assignment.id}}">{{assignment.name}}</option>
+									{% endfor %}
+								</select>
+							</div>
+							<div><span>Grade (%): </span><input  required type="number" name="grade" placeholder="100.0" min="0" max="100" step="0.1"/></div>
+							<br/><input type="submit" class="btn btn-primary" />
+						</fieldset>
+						{% with messages = get_flashed_messages() %}
+							{% if messages %}
+								{% for message in messages %}
+									<div class="alert alert-success">{{message}}</div>
+								{% endfor %}
+							{% endif %}
+						{% endwith %}
+					</form>
+				</div>
+			</div>
+		</div>
+	{% endblock %}

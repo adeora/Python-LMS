@@ -1,0 +1,23 @@
+{% extends "/teachers/base_template.html" %}
+	{% block title %}Assignment: {{name}}{% endblock %}
+	{% block body %}
+		<style>
+			ul {
+				list-style-type: none;
+				margin: 0;
+			}
+		</style>
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<h1>Assignment: {{name}}<small style="font-size: 20px;"><br/>Due: {{due_date}}</small></h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span12">
+					<h2>Assignment Description:</h2>
+					<p>{{description}}</p>
+				</div>
+			</div>
+		</div>
+	{% endblock %}

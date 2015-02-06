@@ -1,0 +1,37 @@
+{% extends "/students/base_template.html" %}
+	{% block title %}Assignment: {{name}}{% endblock %}
+	{% block body %}
+		<style>
+			ul {
+				list-style-type: none;
+				margin: 0;
+			}
+			
+			input.answer {
+				margin-right: 15px;
+			}
+			
+			div.answer-div {
+				padding: 5px 0;
+			}
+			p {
+				font-weight: bold;
+			}
+			span {
+				text-decoration: underline;
+			}
+		</style>
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<h1>Assignment: {{name}}</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span6">
+					<p>{{description}}</p>
+					<p><span>Date Due:</span> {{due_date}}</p>
+				</div>
+			</div>
+		</div>
+	{% endblock %}

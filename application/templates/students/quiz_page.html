@@ -1,0 +1,56 @@
+{% extends "/students/base_template.html" %}
+	{% block title %}Quiz: {{quiz_name}}{% endblock %}
+	{% block body %}
+		<style>
+			ul {
+				list-style-type: none;
+				margin: 0;
+			}
+			
+			input.answer {
+				margin-right: 15px;
+			}
+			
+			div.answer-div {
+				padding: 5px 0;
+			}
+		</style>
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<h1>Quiz: {{quiz_name}}</h1>
+				</div>
+			</div>
+			<div class="row">
+				{% if questions %}
+				<div class="span4">
+					<h2>Take the Quiz</h2>
+					<form method='POST' action='/students/quizzes/grade/{{quiz_id}}/'>
+						<fieldset>
+							{% for question in questions %}
+								<span style="text-decoration: underline;">{{ question.text }}</span>
+								{% set answer_num = 0 %}
+								{% for answer in question.answers %}
+									<div class="answer-div"><input required type="radio" name="{{question.id}}" class="answer" value="{{answer_num}}"/><span>{{answer}}</span></div>
+									{% set answer_num = answer_num + 1 %}
+								{% endfor %}<br/>
+							{% endfor %}
+							<input type="submit" class="btn btn-primary" />
+						</fieldset>
+					</form>
+				</div>
+				{% endif %}
+				{% with messages = get_flashed_messages() %}
+					{% if messages %}
+						<div class="span12">
+							{% for message in messages %}
+								<div class="alert alert-info">
+									{{ message }}
+								</div>
+							{% endfor %}
+						</div>
+					{% endif %}
+				{% endwith %}		
+			</div>
+		</div>
+	{% endblock %}

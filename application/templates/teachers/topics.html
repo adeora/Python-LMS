@@ -1,0 +1,57 @@
+{% extends "/teachers/base_template.html" %}
+	{% block title %}Your Topics{% endblock %}
+	{% block body %}
+		<style>
+			ul {
+				list-style-type: none;
+				margin: 0;
+			}
+			a span {
+				font-size: 12px;
+			}
+		</style>
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<h1>Topics Home</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span6">
+					<h2>Your Topics</h2>
+					<ul>
+						{% for topic in topics %}
+							<li>
+								<a href="/teachers/topics/{{topic.id}}/">{{topic.name}}<br/>
+								<span>Class: {{topic.class}}</span>
+								</a>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="span6">
+					<h2>Create a Topic</h2>
+					<form class="form-horizontal well" method="POST" action="/teachers/topics/create/">
+						<fieldset>
+							<div><span>Topic Name: </span><input type="text" name="name" required /></div>
+							<div><span>Class: </span>
+								<select name="class" required>
+									{% for class in classes %}
+										<option value="{{class.id}}">{{class.name}}</option>
+									{% endfor %}
+								</select>
+							</div>
+							<div><input type="submit" class="btn btn-primary"></div>
+							{% with messages = get_flashed_messages() %}
+								{% if messages %}
+									{% for message in messages %}
+										<div class="alert alert-success" style="margin: 0 auto;"><strong>{{message}}</strong></div>
+									{% endfor %}
+								{% endif %}
+							{% endwith %}
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	{% endblock %}

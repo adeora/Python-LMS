@@ -1,0 +1,60 @@
+{% set navigation_items = [
+	('/students/classes/', 'classes', 'Classes'),
+	('/logout/', 'logout', 'Logout'),
+] -%}
+
+{% set active_page = active_page -%}
+
+<!doctype html>
+<html>
+	<head>
+		<link href="/static/bootstrap.min.css" rel="stylesheet" />
+		<link href="/static/bootstrap-responsive.css" rel="stylesheet" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>{% block title %}{% endblock %}</title>
+		<style>
+			main {
+				margin-top: 70px;
+			}
+			h1 {
+				border-bottom: 1px solid #ccc;
+				padding-bottom: 10px;
+				margin-bottom: 20px;
+			}	
+			h2 {
+				font-size: 26px;
+			}	
+		</style>
+	</head>
+	<body>
+		<header>
+			<nav class="navbar navbar-fixed-top">
+				<div class="navbar-inner">
+					<div class="container">
+						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        					<span class="icon-bar"></span>
+         					<span class="icon-bar"></span>
+         					<span class="icon-bar"></span>
+       					</a>
+						<a class="brand" href="/students/">Student Dashboard</a>
+						<div class="nav-collapse collapse">
+							<ul class="nav" id="main-menu-left">
+								{% for link_href, link_name, link_text in navigation_items %}
+									<li
+										{% if link_name == active_page %} class="active"{% endif%}>
+										<a href="{{ link_href|e }}">{{ link_text|e }}</a>
+									</li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</header>
+		<main>
+			{% block body %}{% endblock %}
+		</main>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript" src="/static/bootstrap.js"></script>
+	</body>
+</html>

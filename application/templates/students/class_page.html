@@ -1,0 +1,64 @@
+{% extends "/students/base_template.html" %}
+	{% block title %}Your Class, {{class_name}}{% endblock %}
+	{% block body %}
+		<style>
+			ul {
+				list-style-type: none;
+				margin: 0;
+			}
+		</style>
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<h1>Your Class, {{class_name}}</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span4">
+					<h2>Topics</h2>
+					<ul>
+						{% for topic in topics %}
+							<li><a href="/students/topics/{{topic.id}}/">{{topic.name}}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="span4">
+					<h2>Assignments Given</h2>
+					<ul>
+						{% for assignment in assignments %}
+							<li><a href="/students/assignments/{{assignment.id}}/">{{assignment.name}}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="span4">
+					<h2>Quizzes Given</h2>
+					<ul>
+						{% for quiz in quizzes %}
+							<li><a href="/students/quizzes/{{quiz.id}}/">{{quiz.name}}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span8">
+					<h2>Grades Given to You</h2>
+					<table class="table table-striped table-hover table-bordered">
+						<thead>
+							<tr>
+								<th>Assignment/Quiz Name</th>
+								<th>Grade</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for grade in grades %}
+								<tr>
+									<td>{{grade.thing_name}}</td>
+									<td>{{grade.grade}}</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	{% endblock %}

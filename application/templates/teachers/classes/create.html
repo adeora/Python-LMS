@@ -1,0 +1,30 @@
+{% extends "/teachers/base_template.html" %}
+	{% block title %}Create a Class{% endblock %}
+	{% block body %}
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<h1>Create a Class</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span12">
+					<h2>Create a Class</h2>
+					<form class="form-horizontal well" method="POST" action ="/teachers/classes/create/">
+					<fieldset>
+						<div style="margin-top: 0;"><span>Class Name: </span><input type="text" class="input-xlarge" name="name"  required/></div>
+						<div style="margin-top: 20px;"><input type="submit" class="btn btn-primary"></div>
+						{% with messages = get_flashed_messages() %}
+							{% if messages %}
+								{% for message in messages %}
+									<div class="alert alert-success" style="margin: 0 auto;">
+										<strong>{{ message }}</strong>
+									</div>
+								{% endfor %}
+							{% endif %}
+						{% endwith %}
+					</fieldset>
+				</div>
+			</div>
+		</div>
+	{% endblock %}

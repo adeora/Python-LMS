@@ -1,0 +1,27 @@
+{% extends "/teachers/base_template.html" %}
+	{% block title %}Teacher Dashboard Home{% endblock %}
+	{% block body %}
+		<style>
+			ul {
+				list-style-type: none;
+				margin: 0;
+			}
+		</style>
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<h1>Dashboard Home</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span4">
+					<h2>Classes You Teach</h2>
+					<ul>
+						{% for class in classes %}
+							<li><a href="/teachers/class/{{class.id}}/">{{class.name}}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	{% endblock %}

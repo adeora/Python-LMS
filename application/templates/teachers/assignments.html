@@ -1,0 +1,59 @@
+{% extends "/teachers/base_template.html" %}
+	{% block title %}Assignments Given{% endblock %}
+	{% block body %}
+		<style>
+			ul {
+				list-style-type: none;
+				margin: 0;
+			}
+			a span {
+				font-size: 12px;
+			}
+		</style>
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<h1>Assignments Home</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span6">
+					<h2>Your Assignments</h2>
+					<ul>
+						{% for assignment in assignments %}
+							<li>
+								<a href="/teachers/assignments/{{assignment.id}}/">{{assignment.name}}<br/>
+								</a>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="span6">
+					<h2>Create an Assignment</h2>
+					<form class="form-horizontal well" method="POST" action="/teachers/assignments/create/">
+						<fieldset>
+							<div><span>Assignment Name: </span><input type="text" name="name"  required/></div>
+							<div><span>Topic: </span>
+								<select name="topic" required>
+									{% for topic in topics %}
+										<option value="{{topic.id}}">{{topic.name}}</option>
+									{% endfor %}
+								</select>
+							</div>
+							<div><span>Description: </span><br/><textarea name="description" rows="4" cols="30"
+								placeholder="Information about the assignment." required></textarea></div>
+							<div><span>Date Due: </span><input type="date" name="due_date" placeholder="yyyy/mm/dd"  required/></div>
+							<div><input type="submit" class="btn btn-primary"></div>
+							{% with messages = get_flashed_messages() %}
+								{% if messages %}
+									{% for message in messages %}
+										<div class="alert alert-success" style="margin: 0 auto;"><strong>{{message}}</strong></div>
+									{% endfor %}
+								{% endif %}
+							{% endwith %}
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	{% endblock %}

@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+	<head>
+		<link href="/static/bootstrap.min.css" rel="stylesheet" />
+		<link href="/static/bootstrap-responsive.css" rel="stylesheet" />
+		<title>Login to the LMS</title>
+		<style>
+			h1 {
+				margin: 50px 0;
+			}
+			fieldset span {
+				//margin-right: 20px;
+			}
+			
+			fieldset div {
+				margin-top: 25px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<h1 style="text-align: center;">Login to the LMS</h1>
+			</div>
+			<div class="row text-center">
+				<form class="form-horizontal well" method="POST" action ="/login/">
+				<fieldset>
+					<div style="margin-top: 0;"><span>Username:  </span><input type="text" class="input-xlarge" name="username" required/></div>
+					<div><span>Password:  </span><input type="password" class="input-xlarge" name="password" required/></div>
+					<div><input type="submit" class="btn btn-primary btn-large"></div>
+					{% with messages = get_flashed_messages() %}
+						{% if messages %}
+							{% for message in messages %}
+								<div class="alert alert-error" style="margin: 0 auto;">
+									<strong>{{ message }}</strong>
+								</div>
+							{% endfor %}
+						{% endif %}
+					{% endwith %}
+				</fieldset>
+			</div>
+		</div>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript" src="/static/bootstrap.js"></script>
+	</body>
+</html>

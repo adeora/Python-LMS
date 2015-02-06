@@ -1,0 +1,49 @@
+{% extends "/students/base_template.html" %}
+	{% block title %}Your Classes{% endblock %}
+	{% block body %}
+		<style>
+			ul {
+				list-style-type: none;
+				margin: 0;
+			}
+			a span {
+				font-size: 12px;
+			}
+		</style>
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<h1>Classes Home</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span6">
+					<h2>Your Classes</h2>
+					<ul>
+						{% for class in classes %}
+							<li>
+								<a href="/students/class/{{class.id}}/">{{class.name}}<br/>
+								</a>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="span6">
+					<h2>Join a Class</h2>
+					<form class="form-horizontal well" method="POST" action="/students/classes/join/">
+						<fieldset>
+							<div><span>Class ID: </span><input type="text" name="id" required/></div>
+							<div><input type="submit" class="btn btn-primary"></div>
+							{% with messages = get_flashed_messages() %}
+								{% if messages %}
+									{% for message in messages %}
+										<div class="alert alert-success" style="margin: 0 auto;"><strong>{{message}}</strong></div>
+									{% endfor %}
+								{% endif %}
+							{% endwith %}
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+	{% endblock %}

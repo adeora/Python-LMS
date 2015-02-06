@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+	<head>
+		<link href="/static/bootstrap.min.css" rel="stylesheet" />
+		<title>Create an Account</title>
+		<style>
+			h1 {
+				margin: 50px 0;
+			}
+			fieldset span {
+				//margin-right: 20px;
+			}
+			
+			fieldset div {
+				margin-top: 25px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row-fluid">
+				<h1 style="text-align: center;">Create an Account</h1>
+			</div>
+			<div class="row-fluid text-center">
+				<form class="form-horizontal well" method="post" action="/register/">
+				<fieldset>
+					<div style="margin-top: 0;"><span>Username:  </span><input type="text" name="username" class="input-xlarge" required/></div>
+					<div><span>Password:  </span><input type="password" class="input-xlarge" name="password"  required/></div>
+					<div><span>Is a Teacher? </span><input type="checkbox" name="isTeacher" value="1"  required/></div>
+					<div><span>Name: </span><input type="text" class="input-xlarge" name="name"  required/></div>
+					<div><span>Email: </span><input type="email" class="input-xlarge"name="email"  required/></div>
+					<div><input type="submit" class="btn btn-primary btn-large" value="Submit"></div>
+					{% with messages = get_flashed_messages() %}
+						{% if messages %}
+							{% for message in messages %}
+								<div class="alert alert-success" style="margin: 0 auto;">
+									<strong>{{ message }}</strong>
+								</div>
+							{% endfor %}
+						{% endif %}
+					{% endwith %}
+				</fieldset>
+				</form>
+				<!--<form method="POST" action="/register/">
+					<input type="text" name="username" />
+					<input type="submit" value="submit"/>
+				</form>-->
+			</div>
+		</div>
+	</body>
+</html>
